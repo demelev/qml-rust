@@ -162,6 +162,7 @@ macro_rules! Q_OBJECT{
                     #[allow(dead_code)]
                     pub fn $write_slot(&mut self, input: $proptype) {
                         self.properties.insert(stringify!($propname), (input.into(), $proptype::metatype()));
+                        self.$notify_sig();
                     })*
 
                     #[allow(dead_code)]
