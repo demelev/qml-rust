@@ -9,29 +9,26 @@ ApplicationWindow {
   title: "of Signals & Slots"
   Component.onCompleted: visible = true
 
+  Connections {
+      target: test
+      onClicked: text.text = "New name"
+  }
+
   ColumnLayout {
+
     anchors.fill: parent
+
     Text {
       id: text
       anchors.horizontalCenter: parent.horizontalCenter
-      text: "Not set yet"
+      text: test.name
     }
+
     Button {
       id: butt
       anchors.horizontalCenter: parent.horizontalCenter
       text: "Notify Rust"
-      Component.onCompleted: {
-        clicked.connect(test.click)
-        test.updateText.connect(updateText)
-        console.log(test.name)
-        test.name = "OAK"
-        console.log(test.name)
-        console.log("Below is list")
-        console.log(test.list)
-      }
-      function updateText(s) {
-        text.text = s
-      }
+      onClicked: test.click()
     }
   }
 }

@@ -10,6 +10,7 @@ Q_OBJECT!(
 pub Test as QTest{
     signals:
         fn updateText(s: String);
+        fn clicked();
     slots:
         fn click();
     properties:
@@ -18,9 +19,12 @@ pub Test as QTest{
 });
 
 impl QTest {
-    pub fn click(&self) -> Option<&QVariant> {
+    pub fn click(&mut self) -> Option<&QVariant> {
         println!("IT CLICKED");
-        self.updateText("Woah, Rust has noticed you".into());
+        self.set_name("Very New name".into());
+        //self.name_changed();
+        //self.updateText("Woah, Rust has noticed you".into());
+        //self.clicked();
         None
     }
 }
